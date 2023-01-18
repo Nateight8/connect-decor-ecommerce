@@ -38,7 +38,7 @@ function Carrousel({ }: Props) {
             >
                 {
                     carrouselImages.map(({ image }) => (
-                        <SwiperSlide>
+                        <SwiperSlide key={image}>
                             <Box sx={{ minHeight: { xs: "70vh", sm: "97vh" }, width: "100%", background: { xs: "#e7e6e8", sm: "blue", md: "red", }, position: "relative", marginBlock: "0.2rem", }}>
                                 <Box sx={{ background: "black", width: "100%", height: "100%", position: "absolute", zIndex: 100, opacity: 0.35 }} />
                                 <Image src={image} alt="image" fill style={{ objectFit: "cover", objectPosition: "bottom" }} />
