@@ -8,6 +8,8 @@ import TabPanel from '@mui/lab/TabPanel';
 import { useState } from 'react'
 import DrawerComponent from './DrawerComponent';
 import TabLink from './TabLink';
+import { useSelector } from 'react-redux';
+import cartSlice from '@/store/features/cartSlice';
 
 
 
@@ -27,6 +29,21 @@ function NavBar({ }: Props) {
     // const Open = () => {
     //     setOpen(true)
     // }
+
+
+
+
+    const cart = useSelector((store) => {
+        return (store.cart.items);
+        // console.log(store.cart.items);
+
+
+    })
+    // const bag = `Bag ( ${cart.length} )`
+    const bag = `Bag ( ${cart.length} )`
+
+    // console.log(cart);
+
 
 
 
@@ -51,7 +68,8 @@ function NavBar({ }: Props) {
 
                             <Tab label="Help" value="Help" />
                             <Tab label="Account" value="Account" />
-                            <Tab label="Bag" value="Bag" />
+                            <Tab label={bag} value="Bag" />
+
                         </TabList>
                         <Box sx={{ display: { xs: "flex", md: "none" } }} >
                             {/* <DrawerComponent open={open}  setOpen={setOpen}/> */}
