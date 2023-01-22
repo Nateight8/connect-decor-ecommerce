@@ -1,5 +1,3 @@
-import Test from '@/pages/test';
-import Testtwo from '@/pages/testtwo';
 import { TabContext } from '@mui/lab'
 import TabList from '@mui/lab/TabList'
 import { Box, AppBar, Tabs, Tab, Typography, Stack, Container, } from '@mui/material'
@@ -8,22 +6,38 @@ import TabPanel from '@mui/lab/TabPanel';
 import { useState } from 'react'
 import DrawerComponent from './DrawerComponent';
 import TabLink from './TabLink';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cartSlice from '@/store/features/cartSlice';
+import MenuCom from './MenuCom';
+import BreadcrumbsComp from './BreadcrumbsComp';
 
 
 
 type Props = {}
 
 function NavBar({ }: Props) {
+
+    // useStates
     const [value, setValue] = useState("Shop")
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     // const [open, setOpen] = useState(false)
 
+
+    // handlers
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
 
     };
 
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const open = Boolean(anchorEl);
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
 
     // const Open = () => {
@@ -32,14 +46,19 @@ function NavBar({ }: Props) {
 
 
 
-
+    // redux
     const cart = useSelector((store) => {
         return (store.cart.items);
         // console.log(store.cart.items);
 
 
     })
-    // const bag = `Bag ( ${cart.length} )`
+
+    // console.log(cart.map((item: {}) => {
+    //     console.log(item);
+
+    // }));
+
     const bag = `Bag ( ${cart.length} )`
 
     // console.log(cart);
@@ -47,40 +66,53 @@ function NavBar({ }: Props) {
 
 
 
+
     return (
-        // <AppBar position="sticky" color='transparent' >
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', }}>
-            <Container maxWidth="xl">
+        <>
+            {/* <AppBar position="sticky" color='transparent' > */}
+            <Box sx={{ borderBottom: 1, borderColor: 'divider', }}>
+                <Container maxWidth="xl">
 
-                <TabContext value={value}>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center" >
-                        <TabList onChange={handleChange} sx={{ display: { xs: "none", md: "flex" } }}>
+                    <TabContext value={value}>
+                        <Stack direction="row" justifyContent="space-between" alignItems="center" >
+                            <TabList onChange={handleChange} sx={{ display: { xs: "none", md: "flex" } }}>
 
-                            <Tab label="Shop" value="Shop" component={Link} href="/" />
-                            <Tab label="Search" value="Search" component={Link} href="/" />
-                            <Tab label="About" value="About" component={Link} href="/" />
+                                <Tab label="Shop" value="Shop" component={Link} href="/" />
+                                <Tab label="Search" value="Search" component={Link} href="/" />
+                                <Tab label="About" value="About" component={Link} href="/" />
 
-                        </TabList>
-                        <Typography variant="body1" sx={{ paddingY: { xs: "1rem", md: 0 } }} >
-                            Disconnect
-                        </Typography>
-                        <TabList onChange={handleChange} sx={{ display: { xs: "none", md: "flex" } }}>
 
-                            <Tab label="Help" value="Help" />
-                            <Tab label="Account" value="Account" />
-                            <Tab label={bag} value="Bag" />
+                            </TabList>
+                            <Typography variant="body1" sx={{ paddingY: { xs: "1rem", md: 0 } }} >
+                                Disconnect
+                            </Typography>
+                            <TabList onChange={handleChange} sx={{ display: { xs: "none", md: "flex" } }}>
 
-                        </TabList>
-                        <Box sx={{ display: { xs: "flex", md: "none" } }} >
-                            {/* <DrawerComponent open={open}  setOpen={setOpen}/> */}
-                            <DrawerComponent />
-                        </Box>
+                                <Tab label="Help" value="Help" />
+                                <Tab label="Account" value="Account" />
+                                <Tab label={bag} value="Bag" onClick={handleClick} />
 
-                    </Stack>
-                </TabContext>
+                            </TabList>
+                            <Box sx={{ display: { xs: "flex", md: "none" } }} >
+                                {/* <DrawerComponent open={open}  setOpen={setOpen}/> */}
+                                <DrawerComponent />
+                            </Box>
 
-            </Container>
-        </Box >
+                        </Stack>
+                    </TabContext>
+                    <MenuCom anchorEl={anchorEl} open={open} handleClose={handleClose} cart={cart} />
+
+                </Container>
+
+            </Box >
+            <Box sx={{ padding: "1rem", borderBottom: 1, borderColor: 'divider', }}>
+                <Typography variant="body2" textAlign="center" >
+                    Home
+                </Typography>
+            </Box>
+            {/* <BreadcrumbsComp /> */}
+        </>
+
         // </AppBar>
 
     )

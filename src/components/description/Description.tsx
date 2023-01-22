@@ -14,6 +14,7 @@ type Props = {
         name: string;
         price: number;
         description: string;
+        id: number;
     };
 }
 
@@ -24,12 +25,12 @@ function Description({ product }: Props) {
 
     const handleClick = () => {
 
-        const { name, price, image } = product
+        const { name, price, image, id } = product
 
-        let payloadData = { image, name, price }
+        let payloadData = { image, name, price, id }
 
-        let pay = dispatch(addToCart({ payload: payloadData }))
-        console.log(pay);
+        let pay = dispatch(addToCart(payloadData))
+        // console.log(pay);
 
     };
 

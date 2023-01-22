@@ -15,7 +15,7 @@ type Props = {
 
 
 export default function Product({ product }: Props) {
-    console.log(product);
+    // console.log(product);
 
     return (
         <main>

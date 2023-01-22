@@ -7,14 +7,10 @@ import TextField from '@mui/material/TextField'
 // import Button from "../components/Button"
 import Typography from '@mui/material/Typography'
 import { Button, Box, Grid, ThemeProvider, CssBaseline } from '@mui/material'
-
 import Hero from '@/components/Hero/Hero';
 import Products from '@/components/Carrousel/Products';
 import { GetServerSideProps } from 'next';
-import { Provider } from 'react-redux';
-import { store } from '@/store/store';
-import theme from '@/components/theme';
-import NavBar from '@/components/navcomponent/NavBar';
+
 
 
 const inter = Inter({ subsets: ['latin'] })
