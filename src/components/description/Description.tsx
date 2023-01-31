@@ -40,7 +40,7 @@ function Description({ product }: Props) {
 
         <Container maxWidth="xl">
 
-            <Stack justifyContent="center" alignItems="center" sx={{ height: "90vh", width: "100%" }}>
+            <Stack justifyContent="center" alignItems="center" sx={{ minHeight: "90vh", width: "100%" }}>
                 <Grid container sx={{ height: "70vh" }}>
                     <Grid item xs={12} md={6} sx={gridItem}>
                         <Box sx={{ width: "100%", height: "100%", position: "relative" }}>

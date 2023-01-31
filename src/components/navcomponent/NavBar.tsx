@@ -49,8 +49,6 @@ function NavBar({ }: Props) {
     // redux
     const cart = useSelector((store) => {
         return (store.cart.items);
-        // console.log(store.cart.items);
-
 
     })
 

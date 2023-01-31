@@ -1,24 +1,38 @@
-import React from 'react'
-import { Typography, Grid, Container, Stack, Box, Button, Divider } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Typography, Grid, Container, Stack, Box, Button, Divider, ListItemText, ListItemButton, Collapse } from '@mui/material'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeFromCart } from '@/store/features/cartSlice'
+import { removeFromCart, sumTotal } from '@/store/features/cartSlice'
+import InputComp from '@/components/search/InputComp'
+import { useRouter } from 'next/router'
+// import { truncateSync } from 'fs'
 
 type Props = {}
 
 function bag({ }: Props) {
 
+    // use State
+
+    const [open, setOpen] = useState(false)
+
+
     // redux
 
     const dispatch = useDispatch()
     const cart = useSelector((store) => {
-        return (store.cart.items);
-        console.log(store.cart.items);
+        return (store.cart);
+        // console.log(store.cart.items);
 
     })
 
-    console.log(cart);
+    console.log(cart.total);
 
+    useEffect(() => {
+        dispatch(sumTotal())
+
+    }, [cart.items])
+
+    const router = useRouter()
 
     return (
         <Container maxWidth="xl" sx={{}}>
@@ -34,7 +48,7 @@ function bag({ }: Props) {
 
                         {
 
-                            cart.map((item) => (
+                            cart.items.map((item) => (
                                 <Grid container sx={{ borderBottom: 1, borderColor: 'divider', paddingY: "0.8rem" }}>
                                     <Grid item xs={3} sx={{}}>
                                         <Box sx={{ width: "100%", height: "10rem", background: "#faf9fa", position: "relative" }}>
@@ -81,15 +95,29 @@ function bag({ }: Props) {
                                 Subtotal
                             </Typography>
                             <Typography variant="body1" >
-                                200
+                                {cart.total}
                             </Typography>
                         </Stack>
-                        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ padding: "1.8rem", borderBottom: 1, borderColor: 'divider', opacity: 0.7, "&:hover": { cursor: "pointer" } }}>
-                            <Typography variant="body1" >
-                                Do you have any discount coupon
-                            </Typography>
 
-                        </Stack>
+
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider', opacity: 0.7, }}>
+                            <ListItemButton
+                                onClick={() => {
+                                    setOpen(!open)
+                                }}
+                                sx={{ padding: "1.8rem", }}
+                            >
+
+                                <ListItemText primary="Do you have any discount coupon?" />
+
+                            </ListItemButton>
+                            <Collapse in={open} timeout="auto" unmountOnExit sx={{ padding: "1.8rem", }}>
+                                <InputComp />
+                            </Collapse>
+
+
+                        </Box>
+
                         <Box sx={{ padding: "1.8rem", borderBottom: 1, borderColor: 'divider', opacity: 0.7 }}>
                             <Stack direction="row" justifyContent="space-between" alignItems="center" pb={1} >
                                 <Typography variant="body1" >
@@ -120,7 +148,9 @@ function bag({ }: Props) {
 
                         <Grid container sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <Grid item xs={6} sx={{ padding: { xs: "0.5rem", md: "0.5rem", lg: "1.3rem" } }}>
-                                <Button variant="outlined" fullWidth >
+                                <Button variant="outlined" fullWidth onClick={() => {
+                                    router.push('/');
+                                }}>
                                     continue shopping
                                 </Button>
                             </Grid>

@@ -15,22 +15,26 @@ import { GetServerSideProps } from 'next';
 
 const inter = Inter({ subsets: ['latin'] })
 
-interface Data {
-  id: number;
-  title: string;
-
+interface products {
+  id: string;
+  description: string;
+  name: string;
+  price: number;
 }
 
 interface Props {
-  products: Data[];
+  data: products[];
 }
 
 
 
-export default function Home({ products }: Props) {
+export default function Home({ data }: Props) {
 
-  // console.log(products);
 
+
+  const products = data.products
+  const pdt = data
+  console.log(pdt);
 
   return (
 
@@ -51,13 +55,13 @@ export default function Home({ products }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
 
-  const res = await fetch("http://localhost:3500/products");
-  const data = await res.json();
+  const res = await fetch("https://raw.githubusercontent.com/Nateight8/connect-json/main/connect.json")
 
+  const data = await res.json()
 
   return {
     props: {
-      products: data
+      data,
     }
   }
 
