@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeFromCart, sumTotal } from '@/store/features/cartSlice'
 import InputComp from '@/components/search/InputComp'
 import { useRouter } from 'next/router'
+import { useAppSelector } from '@/store/store'
 // import { truncateSync } from 'fs'
 
 type Props = {}
@@ -19,18 +20,18 @@ function bag({ }: Props) {
     // redux
 
     const dispatch = useDispatch()
-    const cart = useSelector((store) => {
+    const cart = useAppSelector((store) => {
         return (store.cart);
         // console.log(store.cart.items);
 
     })
 
-    console.log(cart.total);
+    // console.log(cart.total);
 
-    useEffect(() => {
-        dispatch(sumTotal())
+    // useEffect(() => {
+    //     dispatch(sumTotal())
 
-    }, [cart.items])
+    // }, [cart.items])
 
     const router = useRouter()
 
