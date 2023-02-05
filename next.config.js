@@ -4,6 +4,9 @@ const nextConfig = {
     appDir: true,
     esmodules: true,
   },
+  images:{
+    domains:["fakestoreapi.com"],
+  },
 }
 
 module.exports = nextConfig

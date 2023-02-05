@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 
 interface CartItem {
-    image: string; name: string; price: number; id: number
+    image: string; name: string; price: number; id: number;
 }
 
 interface CartState {
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
             const itemId = action.payload;
             state.items = state.items.filter((item) => item.id !== itemId)
             // state.total -= action.payload.price
-            console.log(action);
+            console.log(action.payload);
 
         },
         sumTotal: (state, action: PayloadAction<CartItem>) => {
