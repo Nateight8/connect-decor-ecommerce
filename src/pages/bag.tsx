@@ -21,7 +21,7 @@ import { useAppSelector } from "@/store/store";
 
 type Props = {};
 
-function Home({}: Props) {
+function Bag({}: Props) {
   // use State
 
   const [open, setOpen] = useState(false);
@@ -225,4 +225,4 @@ function Home({}: Props) {
   );
 }
 
-export default Home;
+export default Bag;
