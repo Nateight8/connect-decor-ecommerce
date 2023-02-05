@@ -9,7 +9,13 @@ import Description from "@/components/description/Description";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 
 type Props = {
-  product: {};
+  product: {
+    image: string;
+    name: string;
+    price: number;
+    description: string;
+    id: number;
+  };
 };
 
 export default function Product({ product }: Props) {
@@ -43,7 +49,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
-  const id = context.params.slug;
+  const id = context.params?.slug;
 
   const res = await fetch(`https://fakestoreapi.com/products/${id}`);
   const data = await res.json();
