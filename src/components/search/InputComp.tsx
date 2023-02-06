@@ -9,15 +9,17 @@ import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import { Box, Input, TextField } from "@mui/material";
 import { useAppDispatch } from "@/store/store";
-import { couponCode, sumTotalCost } from "@/store/features/cartSlice";
+import { couponCode } from "@/store/features/cartSlice";
 
 type Props = {};
 
 function InputComp({}: Props) {
   // validation schema
   const couponSchema = Yup.object().shape({
-    coupon: Yup.string()
-    .oneOf(["COUPON50", "COUPON25", "COUPON10"], "Invalid coupon code"),
+    coupon: Yup.string().oneOf(
+      ["COUPON50", "COUPON25", "COUPON10"],
+      "Invalid coupon code"
+    ),
   });
 
   // react hooks
@@ -46,6 +48,23 @@ function InputComp({}: Props) {
     coupon: "",
   };
 
+  interface FieldProps {
+    field: {
+      name: string;
+      value: any;
+      onChange: (event: React.ChangeEvent<any>) => void;
+      onBlur: (event: React.FocusEvent<any>) => void;
+    };
+    form: {
+      touched: { [field: string]: boolean };
+      errors: { [field: string]: string };
+    };
+    meta: {
+      error?: string;
+      touched?: boolean;
+    };
+  }
+
   //   redux
   const dispatch = useAppDispatch();
 
@@ -63,22 +82,13 @@ function InputComp({}: Props) {
           style={{ position: "relative", borderRadius: 0, display: "flex" }}
         >
           <Field name="coupon">
-            {({
-              field, // { name, value, onChange, onBlur }
-              form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-              meta,
-            }) => {
+            {({ field, form, meta }: FieldProps) => {
               return (
                 <>
                   <FormControl fullWidth>
-                    {/* <StyledInputBase
-                      {...field}
-                      placeholder="enter code here..."
-                      error
-                    /> */}
-
                     <StyledInput
                       {...field}
+                      placeholder="enter code here..."
                       error={Boolean(meta.error && meta.touched)}
                     />
                     <FormHelperText>

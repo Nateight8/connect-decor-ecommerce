@@ -12,7 +12,7 @@ import {
   Collapse,
 } from "@mui/material";
 import Image from "next/image";
-// import { useDispatch, useSelector } from "react-redux";
+
 import {
   applyCoupon,
   removeFromCart,
