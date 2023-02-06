@@ -16,16 +16,21 @@ import Image from "next/image";
 // import data from '../data';
 import Product from "./Product";
 
-interface Data {
+interface product {
   id: number;
+  description: string;
   title: string;
+  price: number;
+  image: string;
 }
 
 interface Props {
-  products: Data[];
+  products: product[];
 }
 
 function Products({ products }: Props) {
+  console.log(products);
+
   return (
     <Container maxWidth="xl">
       <Box sx={{ marginY: "1.25rem" }}>
