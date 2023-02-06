@@ -18,6 +18,7 @@ interface product {
   description: string;
   title: string;
   price: number;
+  image: string;
 }
 
 interface Props {
