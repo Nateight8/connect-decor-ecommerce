@@ -42,6 +42,7 @@ function Product({ product }: Props) {
               height: "15rem",
               background: "",
               position: "relative",
+              padding: "1rem",
             }}
           >
             <Image src={image} alt="" fill style={{ objectFit: "contain" }} />

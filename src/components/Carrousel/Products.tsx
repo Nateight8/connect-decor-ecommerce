@@ -53,12 +53,16 @@ function Products({ products }: Props) {
               spaceBetween: 15,
             },
             768: {
-              slidesPerView: 4,
+              slidesPerView: 3,
               spaceBetween: 20,
             },
             1024: {
-              slidesPerView: 5,
-              spaceBetween: 35,
+              slidesPerView: 4.2,
+              spaceBetween: 25,
+            },
+            1200: {
+              slidesPerView: 4.6,
+              spaceBetween: 30,
             },
           }}
           // modules={[Pagination]}

@@ -12,11 +12,15 @@ import {
   Collapse,
 } from "@mui/material";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, sumTotal } from "@/store/features/cartSlice";
+// import { useDispatch, useSelector } from "react-redux";
+import {
+  applyCoupon,
+  removeFromCart,
+  sumTotal,
+} from "@/store/features/cartSlice";
 import InputComp from "@/components/search/InputComp";
 import { useRouter } from "next/router";
-import { useAppSelector } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 // import { truncateSync } from 'fs'
 
 type Props = {};
@@ -28,14 +32,19 @@ function Bag({}: Props) {
 
   // redux
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const cart = useAppSelector((store) => {
     return store.cart;
     // console.log(store.cart.items);
   });
 
-  console.log(cart);
+  useEffect(() => {
+    dispatch(sumTotal());
+    dispatch(applyCoupon());
+  }, [cart]);
+
+  console.log(cart.coupon);
 
   const router = useRouter();
 
@@ -87,7 +96,7 @@ function Bag({}: Props) {
                       >
                         {item.name}
                       </Typography>
-                      <Typography variant="body1">{item.price}</Typography>
+                      <Typography variant="body1">$ {item.price}</Typography>
                     </Box>
                     <Stack
                       justifyContent="space-between"
@@ -127,7 +136,7 @@ function Bag({}: Props) {
               }}
             >
               <Typography variant="body1">Subtotal</Typography>
-              <Typography variant="body1">{cart.total}</Typography>
+              <Typography variant="body1">$ {cart.total}</Typography>
             </Stack>
 
             <Box sx={{ borderBottom: 1, borderColor: "divider", opacity: 0.7 }}>
@@ -166,7 +175,7 @@ function Bag({}: Props) {
                 <Typography variant="body1">
                   Estimated Delivery Charge
                 </Typography>
-                <Typography variant="body1">200</Typography>
+                <Typography variant="body1">$ {cart.deliveryCharge}</Typography>
               </Stack>
               <Stack
                 direction="row"
@@ -174,7 +183,7 @@ function Bag({}: Props) {
                 alignItems="center"
               >
                 <Typography variant="body1">VAT(included)</Typography>
-                <Typography variant="body1">200</Typography>
+                <Typography variant="body1">0</Typography>
               </Stack>
             </Box>
 
@@ -189,7 +198,9 @@ function Bag({}: Props) {
               }}
             >
               <Typography variant="body1">Total</Typography>
-              <Typography variant="body1">200</Typography>
+              <Typography variant="body1">
+                $ {cart.totalCost.toFixed(2)}
+              </Typography>
             </Stack>
 
             <Grid container sx={{ borderBottom: 1, borderColor: "divider" }}>
