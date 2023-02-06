@@ -21,7 +21,7 @@ function Description({ product }: Props) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    const { name, price, image, id, description } = product;
+    const { name, price, image, id } = product;
 
     let payloadData = { image, name, price, id };
 

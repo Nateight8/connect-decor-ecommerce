@@ -13,7 +13,7 @@ import { removeFromCart } from "@/store/features/cartSlice";
 import { useRouter } from "next/router";
 // import Link from 'next/link'
 
-interface item= {
+interface item {
   image: string;
   name: string;
   price: number;
