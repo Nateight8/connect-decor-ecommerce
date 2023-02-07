@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 
 interface item {
   image: string;
-  name: string;
+  title: string;
   price: number;
   id: number;
 }
@@ -116,7 +116,7 @@ function MenuCom({ anchorEl, open, handleClose, cart }: Props) {
                       <Box
                         sx={{ height: "100%", width: "100%", background: "" }}
                       >
-                        <Typography variant="body1">{item.name}</Typography>
+                        <Typography variant="body1">{item.title}</Typography>
                         <Typography variant="body1">$ {item.price}</Typography>
                       </Box>
                       <Stack

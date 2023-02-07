@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CartItem {
   image: string;
-  name: string;
+  title: string;
   price: number;
   id: number;
 }
 
 interface CartState {
   items: CartItem[];
-  amount: number;
+  // amount: number;
   total: number;
   totalCost: number;
   coupon: string;
@@ -18,7 +18,7 @@ interface CartState {
 
 const initialState: CartState = {
   items: [],
-  amount: 0,
+  // amount: 0,
   total: 0,
   totalCost: 0,
   coupon: "",
@@ -44,6 +44,13 @@ const cartSlice = createSlice({
       // state.total -= action.payload.price
       console.log(action.payload);
     },
+
+    // increase: (state) => {
+    //   state.amount = state.amount + 1;
+    // },
+    // decrease: (state) => {
+    //   state.amount = state.amount === 0 ? 0 : state.amount - 1;
+    // },
     sumTotal: (state) => {
       let total = 0;
 
@@ -72,8 +79,15 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, sumTotal, applyCoupon, couponCode } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  sumTotal,
+  applyCoupon,
+  couponCode,
+  // increase,
+  // decrease,
+} = cartSlice.actions;
 export default cartSlice.reducer;
 
 // console.log(cartSlice);

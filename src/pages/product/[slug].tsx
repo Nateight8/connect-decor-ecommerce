@@ -1,17 +1,24 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
-import { ThemeProvider } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Link,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 import theme from "@/components/theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import NavBar from "@/components/navcomponent/NavBar";
 import Description from "@/components/description/Description";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
+import Head from "@/app/head";
 
 type Props = {
   product: {
     image: string;
-    name: string;
+    title: string;
     price: number;
     description: string;
     id: number;
@@ -19,12 +26,25 @@ type Props = {
 };
 
 export default function Product({ product }: Props) {
-  // console.log(product);
+  console.log(product);
 
   return (
-    <main>
-      <Description product={product} />
-    </main>
+    <>
+      <Head />
+      <main>
+        <Box sx={{ padding: "1rem", borderBottom: 1, borderColor: "divider" }}>
+          <Breadcrumbs>
+            <Link underline="hover" href="/">
+              Home
+            </Link>
+            <Typography variant="body1" textAlign="center">
+              {product.title}
+            </Typography>
+          </Breadcrumbs>
+        </Box>
+        <Description product={product} />
+      </main>
+    </>
   );
 }
 

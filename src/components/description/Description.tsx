@@ -10,7 +10,7 @@ import { addToCart } from "@/store/features/cartSlice";
 type Props = {
   product: {
     image: string;
-    name: string;
+    title: string;
     price: number;
     description: string;
     id: number;
@@ -21,9 +21,9 @@ function Description({ product }: Props) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    const { name, price, image, id } = product;
+    const { title, price, image, id } = product;
 
-    let payloadData = { image, name, price, id };
+    let payloadData = { image, title, price, id };
 
     dispatch(addToCart(payloadData));
     // console.log(pay);
@@ -34,8 +34,6 @@ function Description({ product }: Props) {
     background: "#faf9fa",
     minHeight: "16rem",
   };
-
-  console.log();
 
   return (
     <Container maxWidth="xl">
@@ -70,7 +68,7 @@ function Description({ product }: Props) {
                     paddingBlock: { xs: "0.5rem", sm: "1.25rem" },
                   }}
                 >
-                  <Typography variant="h5">{product.name}</Typography>
+                  <Typography variant="h5">{product.title}</Typography>
                   <Typography variant="h6" sx={{ opacity: 0.7 }}>
                     $ {product.price}
                   </Typography>

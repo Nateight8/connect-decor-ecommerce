@@ -10,6 +10,7 @@ import { Button, Box, Grid, ThemeProvider, CssBaseline } from "@mui/material";
 import Hero from "@/components/Hero/Hero";
 import Products from "@/components/Carrousel/Products";
 import { GetServerSideProps } from "next";
+import Head from "@/app/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,13 +28,21 @@ interface Props {
 
 export default function Home({ products }: Props) {
   return (
-    <main>
-      <Hero />
-      <Box sx={{ minHeight: "100vh", width: "100%" }}>
-        <Typography variant="body1"></Typography>
-        <Products products={products} />
-      </Box>
-    </main>
+    <>
+      <Head />
+      <main>
+        <Box sx={{ padding: "1rem", borderBottom: 1, borderColor: "divider" }}>
+          <Typography variant="body1" textAlign="center">
+            Home
+          </Typography>
+        </Box>
+        <Hero />
+        <Box sx={{ minHeight: "100vh", width: "100%" }}>
+          <Typography variant="body1"></Typography>
+          <Products products={products} />
+        </Box>
+      </main>
+    </>
   );
 }
 
