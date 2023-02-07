@@ -5,12 +5,11 @@ import {
   Box,
   Breadcrumbs,
   Link,
+  Stack,
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import theme from "@/components/theme";
-import CssBaseline from "@mui/material/CssBaseline";
-import NavBar from "@/components/navcomponent/NavBar";
+
 import Description from "@/components/description/Description";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import Head from "@/app/head";
@@ -32,16 +31,20 @@ export default function Product({ product }: Props) {
     <>
       <Head />
       <main>
-        <Box sx={{ padding: "1rem", borderBottom: 1, borderColor: "divider" }}>
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          sx={{ padding: "1rem", borderBottom: 1, borderColor: "divider" }}
+        >
           <Breadcrumbs>
             <Link underline="hover" href="/">
               Home
             </Link>
             <Typography variant="body1" textAlign="center">
-              {product.title}
+              Product
             </Typography>
           </Breadcrumbs>
-        </Box>
+        </Stack>
         <Description product={product} />
       </main>
     </>
