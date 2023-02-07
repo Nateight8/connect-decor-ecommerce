@@ -44,7 +44,7 @@ function Bag({}: Props) {
     dispatch(applyCoupon());
   }, [cart]);
 
-  console.log(cart.coupon);
+  // console.log(cart.coupon);
 
   const router = useRouter();
 

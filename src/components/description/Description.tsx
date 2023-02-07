@@ -34,6 +34,9 @@ function Description({ product }: Props) {
     background: "#faf9fa",
     minHeight: "16rem",
   };
+
+  console.log();
+
   return (
     <Container maxWidth="xl">
       <Stack
