@@ -20,7 +20,8 @@ interface product {
   details: string;
   name: string;
   price: number;
-  // image: string;
+  image: string;
+  slug: { current: string };
 }
 
 interface Props {
@@ -28,7 +29,7 @@ interface Props {
 }
 
 export default function Home({ products }: Props) {
-  console.log(products[0]);
+  // console.log(products[0]);
 
   return (
     <>

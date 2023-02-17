@@ -12,13 +12,19 @@ export const client = sanityClient({
 
 const builder = imageUrlBuilder(client);
 
-export const urlFor = (source: { asset: string }) => {
+export const urlFor = (source: any) => {
+  console.log(source);
+
   if (source) {
     if (Array.isArray(source)) {
       source = source[0];
     }
 
     if (source.asset) {
+      console.log(source);
+
+      //
+      // return imageUrlBuilder(client).image(source.asset);
       return imageUrlBuilder(client).image(source.asset).url();
     }
   }

@@ -35,7 +35,7 @@ interface Props {
 function Product({ product }: Props) {
   const { image, name, price, _id, slug } = product;
 
-  console.log(product.slug);
+  console.log(urlFor(image));
 
   // let imgUrl = urlFor(product.image);
 

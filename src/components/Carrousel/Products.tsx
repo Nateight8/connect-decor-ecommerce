@@ -21,7 +21,8 @@ interface product {
   details: string;
   name: string;
   price: number;
-  // image: string;
+  image: string;
+  slug: { current: string };
 }
 
 interface Props {
@@ -71,7 +72,7 @@ function Products({ products }: Props) {
         >
           {products.map((product) => {
             return (
-              <SwiperSlide key={product.id}>
+              <SwiperSlide key={product._id}>
                 <Product product={product} />
               </SwiperSlide>
             );
