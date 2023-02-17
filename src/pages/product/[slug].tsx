@@ -17,11 +17,12 @@ import { client } from "lib/client";
 
 type Props = {
   product: {
-    image: string;
-    title: string;
+    _id: string;
+    details: string;
+    name: string;
     price: number;
-    description: string;
-    id: number;
+    image: string;
+    slug: { current: string };
   };
 };
 
@@ -54,7 +55,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const querry = '*[_type == "product"]';
   const products = await client.fetch(querry);
 
-  const paths = products.map(({ slug }) => {
+  const paths = products.map((path: any) => {
+    const { slug } = path;
     const { current } = slug;
 
     return {
