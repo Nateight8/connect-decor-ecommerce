@@ -23,12 +23,7 @@ function Description({ product }: Props) {
   const { name, price, details, image } = product;
 
   const handleClick = () => {
-    // const { name, price, image, _id } = product;
-
-    // let payloadData = { image, name, price, _id };
-
     dispatch(addToCart(product));
-    // console.log(pay);
   };
 
   const gridItem = {
