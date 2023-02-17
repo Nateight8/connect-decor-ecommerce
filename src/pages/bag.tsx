@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import Head from "@/app/head";
 import AddIcon from "@mui/icons-material/Add";
+import { urlFor } from "lib/client";
 
 type Props = {};
 
@@ -81,7 +82,7 @@ function Bag({}: Props) {
 
               {cart.items.map((item) => (
                 <Grid
-                  key={item.title}
+                  key={item.name}
                   container
                   sx={{
                     borderBottom: 1,
@@ -99,7 +100,7 @@ function Bag({}: Props) {
                       }}
                     >
                       <Image
-                        src={item.image}
+                        src={urlFor(item.image)}
                         alt=""
                         fill
                         style={{
@@ -119,7 +120,7 @@ function Bag({}: Props) {
                           variant="body1"
                           sx={{ textTransform: "capitalize" }}
                         >
-                          {item.title}
+                          {item.name}
                         </Typography>
                         <Typography variant="body1">$ {item.price}</Typography>
                       </Box>
@@ -158,7 +159,7 @@ function Bag({}: Props) {
                           <Button
                             variant="outlined"
                             onClick={() => {
-                              dispatch(removeFromCart(item.id));
+                              dispatch(removeFromCart(item._id));
                             }}
                           >
                             remove

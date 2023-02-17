@@ -43,19 +43,10 @@ function NavBar({}: Props) {
     setAnchorEl(null);
   };
 
-  // const Open = () => {
-  //     setOpen(true)
-  // }
-
   // redux
   const cart = useAppSelector((store) => {
     return store.cart.items;
   });
-
-  // console.log(cart.map((item: {}) => {
-  //     console.log(item);
-
-  // }));
 
   const bag = `Bag ( ${cart.length} )`;
 

@@ -4,9 +4,9 @@ const nextConfig = {
     appDir: true,
     esmodules: true,
   },
-  images:{
-    domains:["fakestoreapi.com"],
+  images: {
+    domains: ["fakestoreapi.com", "cdn.sanity.io"],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

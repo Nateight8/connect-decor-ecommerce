@@ -6,34 +6,39 @@ import { Box, Stack, Typography, Button, Divider } from "@mui/material";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/features/cartSlice";
+import { urlFor } from "lib/client";
 
 type Props = {
   product: {
     image: string;
-    title: string;
+    name: string;
     price: number;
-    description: string;
-    id: number;
+    details: string;
+    _id: string;
   };
 };
 
 function Description({ product }: Props) {
   const dispatch = useDispatch();
+  const { name, price, details, image } = product;
 
   const handleClick = () => {
-    const { title, price, image, id } = product;
+    // const { name, price, image, _id } = product;
 
-    let payloadData = { image, title, price, id };
+    // let payloadData = { image, name, price, _id };
 
-    dispatch(addToCart(payloadData));
+    dispatch(addToCart(product));
     // console.log(pay);
   };
 
   const gridItem = {
-    padding: { sm: "1.5rem", md: "4.75rem" },
+    // padding: { sm: "1.5rem", md: ".75rem" },
+    padding: "0.75rem",
     background: "#faf9fa",
     minHeight: "16rem",
   };
+
+  console.log(product);
 
   return (
     <Container maxWidth="xl">
@@ -46,7 +51,7 @@ function Description({ product }: Props) {
           <Grid item xs={12} md={6} sx={gridItem}>
             <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
               <Image
-                src={product.image}
+                src={urlFor(image)}
                 alt=""
                 fill
                 style={{ objectFit: "contain" }}
@@ -68,9 +73,9 @@ function Description({ product }: Props) {
                     paddingBlock: { xs: "0.5rem", sm: "1.25rem" },
                   }}
                 >
-                  <Typography variant="h5">{product.title}</Typography>
+                  <Typography variant="h5">{name}</Typography>
                   <Typography variant="h6" sx={{ opacity: 0.7 }}>
-                    $ {product.price}
+                    $ {price}
                   </Typography>
                 </Box>
                 <Box sx={{ marginBottom: { sm: "1rem" } }}>
@@ -94,7 +99,7 @@ function Description({ product }: Props) {
                 <Divider />
               </Box>
               <Box sx={{ opacity: 0.6, paddingX: "0.5rem" }}>
-                <Typography variant="body1">{product.description}</Typography>
+                <Typography variant="body1">{details}</Typography>
               </Box>
             </Box>
           </Grid>

@@ -17,11 +17,11 @@ import Image from "next/image";
 import Product from "./Product";
 
 interface product {
-  id: number;
-  description: string;
-  title: string;
+  _id: string;
+  details: string;
+  name: string;
   price: number;
-  image: string;
+  // image: string;
 }
 
 interface Props {

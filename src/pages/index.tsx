@@ -11,15 +11,16 @@ import Hero from "@/components/Hero/Hero";
 import Products from "@/components/Carrousel/Products";
 import { GetServerSideProps } from "next";
 import Head from "@/app/head";
+import { client } from "lib/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
 interface product {
-  id: number;
-  description: string;
-  title: string;
+  _id: string;
+  details: string;
+  name: string;
   price: number;
-  image: string;
+  // image: string;
 }
 
 interface Props {
@@ -27,6 +28,8 @@ interface Props {
 }
 
 export default function Home({ products }: Props) {
+  console.log(products[0]);
+
   return (
     <>
       <Head />
@@ -47,13 +50,12 @@ export default function Home({ products }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
-
-  const data = await res.json();
+  const querry = '*[_type == "product"]';
+  const products = await client.fetch(querry);
 
   return {
     props: {
-      products: data,
+      products,
     },
   };
 };

@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/features/cartSlice";
 import Link from "next/link";
+import { urlFor } from "lib/client";
 
 // type Props = {
 //   image: string;
@@ -22,19 +23,28 @@ import Link from "next/link";
 
 interface Props {
   product: {
-    id: number;
-    description: string;
-    title: string;
+    _id: string;
+    details: string;
+    name: string;
     price: number;
     image: string;
+    slug: { current: string };
   };
 }
 
 function Product({ product }: Props) {
-  const { image, title, price, id } = product;
+  const { image, name, price, _id, slug } = product;
+
+  console.log(product.slug);
+
+  // let imgUrl = urlFor(product.image);
+
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <Link href={`/product/${id}`} style={{ textDecoration: "none" }}>
+      <Link
+        href={`/product/${slug.current}`}
+        style={{ textDecoration: "none" }}
+      >
         <CardActionArea>
           <Box
             sx={{
@@ -45,7 +55,12 @@ function Product({ product }: Props) {
               padding: "1rem",
             }}
           >
-            <Image src={image} alt="" fill style={{ objectFit: "contain" }} />
+            <Image
+              src={urlFor(image)}
+              alt=""
+              fill
+              style={{ objectFit: "contain" }}
+            />
           </Box>
           <CardContent>
             <div
@@ -64,7 +79,7 @@ function Product({ product }: Props) {
                   whiteSpace: "nowrap",
                 }}
               >
-                {title}
+                {name}
               </Typography>
             </div>
             <Typography

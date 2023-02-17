@@ -11,13 +11,14 @@ import { Divider, Link } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "@/store/features/cartSlice";
 import { useRouter } from "next/router";
+import { urlFor } from "lib/client";
 // import Link from 'next/link'
 
 interface item {
   image: string;
-  title: string;
+  name: string;
   price: number;
-  id: number;
+  _id: string;
 }
 
 interface Props {
@@ -97,7 +98,7 @@ function MenuCom({ anchorEl, open, handleClose, cart }: Props) {
                       }}
                     >
                       <Image
-                        src={item.image}
+                        src={urlFor(item.image)}
                         alt=""
                         fill
                         style={{
@@ -116,7 +117,7 @@ function MenuCom({ anchorEl, open, handleClose, cart }: Props) {
                       <Box
                         sx={{ height: "100%", width: "100%", background: "" }}
                       >
-                        <Typography variant="body1">{item.title}</Typography>
+                        <Typography variant="body1">{item.name}</Typography>
                         <Typography variant="body1">$ {item.price}</Typography>
                       </Box>
                       <Stack
@@ -128,7 +129,7 @@ function MenuCom({ anchorEl, open, handleClose, cart }: Props) {
                           variant="outlined"
                           size="small"
                           onClick={() => {
-                            dispatch(removeFromCart(item.id));
+                            dispatch(removeFromCart(item._id));
                           }}
                         >
                           Remove

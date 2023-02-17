@@ -13,6 +13,7 @@ import {
 import Description from "@/components/description/Description";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import Head from "@/app/head";
+import { client } from "lib/client";
 
 type Props = {
   product: {
@@ -25,8 +26,6 @@ type Props = {
 };
 
 export default function Product({ product }: Props) {
-  console.log(product);
-
   return (
     <>
       <Head />
@@ -52,16 +51,16 @@ export default function Product({ product }: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
-  const data = await res.json();
+  const querry = '*[_type == "product"]';
+  const products = await client.fetch(querry);
 
-  const paths = data.map((path: { id: number }) => {
+  const paths = products.map(({ slug }) => {
+    const { current } = slug;
+
     return {
-      params: { slug: path.id.toString() },
+      params: { slug: current },
     };
   });
-
-  // console.log(data);
 
   return {
     paths,
@@ -72,16 +71,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
-  const id = context.params?.slug;
-
-  const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-  const data = await res.json();
-
-  // console.log(data);
+  const slug = context.params?.slug;
+  const querry = `*[_type == "product" && slug.current == '${slug}'][0]`;
+  const product = await client.fetch(querry);
 
   return {
     props: {
-      product: data,
+      product,
     },
   };
 };
