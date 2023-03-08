@@ -72,8 +72,14 @@ function Bag({}: Props) {
           </Typography>
         </Breadcrumbs>
       </Stack>
-      <Container maxWidth="xl" sx={{ marginBottom: "2.25rem" }}>
-        <Grid container sx={{ minHeight: "80vh", marginBottom: "2.25rem" }}>
+      <Container maxWidth="xl" sx={{}}>
+        <Grid
+          container
+          sx={{
+            minHeight: { xs: "120vh", md: "80vh" },
+            marginBottom: "2.25rem",
+          }}
+        >
           <Grid item xs={12} md={6.8}>
             <Grid container sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Grid item xs={12} sx={{ paddingY: "1rem" }}>

@@ -50,7 +50,7 @@ function NavBar({}: Props) {
 
   const bag = `Bag ( ${cart.length} )`;
 
-  console.log(cart);
+  // console.log(cart);
 
   return (
     <>
@@ -87,7 +87,7 @@ function NavBar({}: Props) {
               </TabList>
               <Box sx={{ display: { xs: "flex", md: "none" } }}>
                 {/* <DrawerComponent open={open}  setOpen={setOpen}/> */}
-                <DrawerComponent />
+                <DrawerComponent cart={cart.length} />
               </Box>
             </Stack>
           </TabContext>
